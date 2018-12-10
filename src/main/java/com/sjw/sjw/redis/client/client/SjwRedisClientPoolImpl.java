@@ -152,8 +152,10 @@ public class SjwRedisClientPoolImpl implements SjwRedisClientPool {
             return this;
         }
 
-        public SjwRedisClientPoolImpl build() {
-            return new SjwRedisClientPoolImpl(this);
+        public SjwRedisClientPool build() {
+            SjwRedisClientPool pool = new SjwRedisClientPoolImpl(this);
+            pool.initPool();
+            return pool;
         }
 
     }

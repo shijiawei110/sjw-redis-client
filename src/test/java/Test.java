@@ -11,23 +11,35 @@ import java.util.List;
  * @date 2018/11/19
  */
 public class Test {
-    public static void main(String[] args) throws  SjwRedisClientTryException {
-//        SjwRedisClientPoolImpl.Build build = new SjwRedisClientPoolImpl.Build();
-//        build.setHost("47.100.118.214");
-//        build.setPort(6379);
-//        build.setPassword("Shijiawei#110");
-//        build.setPoolSize(1);
-//        build.setOutTimeMills(5000L);
-//        build.setWorkerGroupSize(1);
-//        SjwRedisClientPool pool = build.build();
-//        pool.initPool();
-        SjwRedisClientPool pool = SjwRedisClientPoolImpl.simplePool("47.100.118.214", 6379, "Shijiawei#110");
+    public static void main(String[] args) throws SjwRedisClientTryException {
+        SjwRedisClientPoolImpl.Build build = new SjwRedisClientPoolImpl.Build();
+        build.setHost("47.100.118.214");
+        build.setPort(6379);
+        build.setPassword("Shijiawei#110");
+        build.setPoolSize(1);
+        build.setOutTimeMills(5000L);
+        build.setWorkerGroupSize(1);
+        SjwRedisClientPool pool = build.build();
+//        SjwRedisClientPool pool = SjwRedisClientPoolImpl.simplePool("47.100.118.214", 6379, "Shijiawei#110");
         SjwRedisClient client = pool.getClient();
 //        SjwRedisClient client2 = pool.getClient();
         try {
             long start = System.currentTimeMillis();
-            int response = client.hincrby("kkkk","dddd",-500);
-//            printRes(start, response);
+            client.stringSet("test", "ddd");
+            client.stringSet("test", "ddd", 100);
+            String res = client.stringGet("test");
+            String[] resList = client.stringMget("test", "test1", "test2");
+            client.stringSetNx("lock", "1", 100);
+            Book book = Book.getOneBook();
+            client.lpush("list", "11");
+            client.lpush("list", book);
+            String listRes = client.rpop("list");
+            Book listBook = client.rpop("list",Book.class);
+            client.hset("hash","h","dd");
+
+
+            int response = client.hincrby("kkkk", "dddd", -500);
+            printRes(start, response);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
