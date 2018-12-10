@@ -16,40 +16,40 @@ SjwRedisClientPool pool = SjwRedisClientPoolImpl.simplePool("127.0.0.1", 6379, "
 
 ### 2:详细参数指定获取
 SjwRedisClientPoolImpl.Build build = new SjwRedisClientPoolImpl.Build();  
-/**设置host**/
+/**设置host**/  
 build.setHost("127.0.0.1");  
-/**设置端口**/
+/**设置端口**/  
 build.setPort(6379);  
-/**设置密码(没有就不填写)**/
+/**设置密码(没有就不填写)**/  
 build.setPassword("password");  
-/**客户端数目**/
+/**客户端数目**/  
 build.setPoolSize(1);  
-/**tcp连接超时时间**/
+/**tcp连接超时时间**/  
 build.setOutTimeMills(5000L);  
-/**client的netty工作线程**/
+/**client的netty工作线程**/  
 build.setWorkerGroupSize(1);  
 SjwRedisClientPool pool = build.build();  
 ## 获取客户端client(如果都在使用就会有异常需要处理):
 SjwRedisClient client = pool.getClient();  
 
 ## 使用实例:
-/**帮你封装好了分布式锁**/
+/**帮你封装好了分布式锁**/  
 client.stringSetNx("lock", "1", 100);  
 
-/**string demo**/
+/**string demo**/  
 client.stringSet("test", "ddd");  
 client.stringSet("test", "ddd", 100);  
 String res = client.stringGet("test");  
 String[] resList = client.stringMget("test", "test1", "test2");  
 
-/**list demo**/
+/**list demo**/  
 Book book = Book.getOneBook();  
 client.lpush("list", "11");  
 client.lpush("list", book);  
 String listRes = client.rpop("list");  
 Book listBook = client.rpop("list",Book.class);  
 
-/**hash demo**/
+/**hash demo**/  
 client.hset("hash","h","dd");  
 
 # 意见反馈和BUG请联系我哦,一起学习.
