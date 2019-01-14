@@ -1,5 +1,5 @@
 # sjw-redis-client
-施嘉威的开源redis客户端(主要使用netty完成)
+自己写的一款开源redis客户端(主要使用netty完成)
 An open source redis client based on netty
 
 # 目前支持的功能 / Functions currently supported:
