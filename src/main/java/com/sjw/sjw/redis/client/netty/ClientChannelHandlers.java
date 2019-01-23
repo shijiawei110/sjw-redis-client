@@ -23,6 +23,6 @@ public class ClientChannelHandlers extends ChannelInitializer<SocketChannel> {
 //        pipeline.addLast("decoder", new StringDecoder());
         pipeline.addLast(new RedisDecoder());
         pipeline.addLast("encoder", new StringEncoder());
-        pipeline.addLast(new ClientHandler());
+        pipeline.addLast(ClientHandler.instance);
     }
 }

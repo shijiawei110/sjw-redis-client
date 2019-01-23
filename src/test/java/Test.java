@@ -25,21 +25,10 @@ public class Test {
 //        SjwRedisClient client2 = pool.getClient();
         try {
             long start = System.currentTimeMillis();
-            client.stringSet("test", "ddd");
             client.stringSet("test", "ddd", 100);
             String res = client.stringGet("test");
-            String[] resList = client.stringMget("test", "test1", "test2");
-            client.stringSetNx("lock", "1", 100);
-            Book book = Book.getOneBook();
-            client.lpush("list", "11");
-            client.lpush("list", book);
-            String listRes = client.rpop("list");
-            Book listBook = client.rpop("list",Book.class);
-            client.hset("hash","h","dd");
 
-
-            int response = client.hincrby("kkkk", "dddd", -500);
-            printRes(start, response);
+            printRes(start, res);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -14,6 +14,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 @ChannelHandler.Sharable
 public class ClientHandler extends SimpleChannelInboundHandler<RedisRespone> {
 
+    public static ClientHandler instance = new ClientHandler();
+
 
     /**
      * 重写连接激活
